@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+:root {
+    --titulos: #1B0A2C;
+    --color-logo: #AF74C3;
+}
+
 img {
     max-width: 100%;
 }
@@ -11,6 +16,7 @@ img {
 body {
     min-width: 360px;
     max-width: 1440px;
+    font-family: 'Barlow', sans-serif;
 }
 
 .btn {
@@ -27,6 +33,83 @@ body {
     height: 640px;
     display: flex;
     flex-direction: column;
+}
+
+.cards-car {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 20px 40px;
+    background: #f6f6f6;
+    box-shadow: 0px 1px 10px #727171;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    top: 45px;
+    right: 80px;
+    text-align: center;
+    transition: 1s;
+    transform: scale(0);
+    transform-origin: top right;
+}
+
+.cards-car.toggle {
+    transform: scale(1);
+}
+
+.cards-car::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Estilos barra (thumb) de scroll */
+.cards-car::-webkit-scrollbar-thumb {
+    background: rgb(224, 223, 223);
+    border-radius: 4px;
+}
+
+.cards-car::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+.cards-car::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos track de scroll */
+.cards-car::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+}
+
+.cards-car::-webkit-scrollbar-track:hover, 
+.cards-car::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+}
+
+.cards-car h2 {
+    margin: 5px 0px 20px 0px;
+}
+
+.cards-car .card-pro-car {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cards-car .card-pro-car img {
+    width: 20%;
+}
+
+.cards-car .card-pro-car .box-info h2 {
+    color: var(--titulos);
+    font-size: 13px;
+}
+
+.cards-car .card-pro-car .box-info span {
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--titulos);
 }
 
 .box-header .nav {
@@ -53,4 +136,65 @@ body {
     background-image: url('../img/header-banner.jpg');
     background-position: center;
     background-size: cover;
+}
+
+.title-products {
+    color: var(--titulos);
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    margin: 30px ;
+}
+
+.cards-products {
+    margin: 40px auto;
+    padding: 10px 0px;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.cards-products .card{
+    width: 230px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #c9c9c9;
+}
+
+.cards-products .card .box-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cards-products .card .box-info h2 {
+    color: var(--titulos);
+    font-size: 18px;
+}
+
+.cards-products .card .box-info h3 {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--color-logo);
+}
+
+.cards-products .card .box-info span {
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--titulos);
+}
+.cards-products .card .btn-add-to-car {
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
