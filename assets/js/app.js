@@ -60,6 +60,7 @@ let productsInCar = [];
 const nameCarLS = "carrito";
 
 laodProducts();
+loadProductInCar();
 
 function laodProducts(){
 
@@ -97,9 +98,9 @@ function laodProducts(){
 
 
 function formattterPrice(price) {
-    const formatter = new Intl.NumberFormat('en-US', {
+    const formatter = new Intl.NumberFormat('es-CO', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'COP',
         minimumFractionDigits: 0
     })
 
@@ -112,8 +113,6 @@ function addToCar(productId) {
         id: productId,
         cantidad: 1
     }
-
-    console.log(getCarLS());
 
     if(getCarLS() === false){
         productsInCar.push(productNew);
@@ -136,10 +135,64 @@ function addToCar(productId) {
             productsInCar.push(productNew);
         }
         localStorage.setItem(nameCarLS, JSON.stringify(productsInCar));
+        loadProductInCar()
     }
 
     
 }
+
+function loadProductInCar() {
+    console.log("CARGANDO CARRITO");
+    const cardsCar = document.querySelector('.cards-car');
+    let html = ' <h2>Carrito de Compras</h2>';
+    productsInCar = getCarLS(); 
+
+    let productsInCarView = [];
+    console.log(productsInCar);
+    if(productsInCar == false) {
+        cardsCar.innerHTML = html;
+        return;
+    } else {
+        products.forEach(
+            (product) => {
+                productsInCar.forEach(
+                    (productInCar) => {
+                        if(productInCar.id === product.id){
+                            let productNew = {
+                                ...product,
+                                cantidad: productInCar.cantidad
+                            }
+                            productsInCarView.push(productNew)
+                        }
+                    }
+                )
+            }
+        )
+    
+        productsInCarView.forEach(
+            (productInCar) => {
+                html += `
+                    <div class="card-pro-car">
+                        <img src="${productInCar.img_url}" alt="">
+                        <div class="box-info">
+                            <h2 class="name-product">Chamarra Color Beige</h2>
+                            <span class="price-product-qty">${formattterPrice(productInCar.price)} * ${productInCar.cantidad}</span>
+                            <span class="price-product-total">${formattterPrice(productInCar.price*productInCar.cantidad)}</span>
+                        </div>
+                        <button class="btn btn-borrar" onclick="deleteToCar(${productInCar.id})">
+                            X
+                        </button>
+                    </div>
+                `;
+                cardsCar.innerHTML = html
+            }
+        )
+
+        document.querySelector('.badge .qty').innerHTML = productsInCarView.length;
+    }
+    
+}
+
 
 function getCarLS() {
     if (localStorage.getItem(nameCarLS)) {
@@ -147,4 +200,24 @@ function getCarLS() {
     } else {
         return false;
     }
+}
+
+function deleteToCar(productId) {
+    productsInCar = getCarLS();
+
+    productsInCar.forEach(
+        (product, index) => {
+            if( product.id === productId) {
+                productsInCar.splice(index, 1);
+            }
+        }
+    )
+
+    localStorage.setItem(nameCarLS, JSON.stringify(productsInCar));
+    loadProductInCar()
+}
+
+
+function toggleCar() {
+    document.querySelector('.cards-car').classList.toggle('toggle');
 }
