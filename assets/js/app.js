@@ -186,10 +186,10 @@ function loadProductInCar() {
                         </button>
                     </div>
                 `;
-                cardsCar.innerHTML = html
             }
         )
-
+        html +=`<button class="btn btn-clear-car" onclick="clearCarrito()">Limpiar Todo</button>`;    
+        cardsCar.innerHTML = html
         badge.innerHTML = productsInCarView.length;
     }
     
@@ -222,4 +222,9 @@ function deleteToCar(productId) {
 
 function toggleCar() {
     document.querySelector('.cards-car').classList.toggle('toggle');
+}
+
+function clearCarrito() {
+    localStorage.removeItem(nameCarLS)
+    loadProductInCar();
 }

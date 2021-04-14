@@ -66,6 +66,17 @@ body {
     transform: scale(1);
 }
 
+.cards-car .btn-clear-car {
+    border: 1px solid #e87777;
+    margin: 20px 0px;
+    color: var(--titulos);
+}
+
+.cards-car .btn-clear-car:hover {
+    background: #e87777;
+    color: #fff;
+}
+
 .cards-car::-webkit-scrollbar {
     width: 5px;
 }
