@@ -117,6 +117,7 @@ function addToCar(productId) {
     if(getCarLS() === false){
         productsInCar.push(productNew);
         localStorage.setItem(nameCarLS, JSON.stringify(productsInCar));
+        loadProductInCar()
     } else {
         productsInCar = getCarLS();
 
@@ -142,15 +143,16 @@ function addToCar(productId) {
 }
 
 function loadProductInCar() {
-    console.log("CARGANDO CARRITO");
     const cardsCar = document.querySelector('.cards-car');
     let html = ' <h2>Carrito de Compras</h2>';
     productsInCar = getCarLS(); 
+    const badge = document.querySelector('.badge .qty');
 
     let productsInCarView = [];
-    console.log(productsInCar);
     if(productsInCar == false) {
         cardsCar.innerHTML = html;
+        badge.innerHTML = 0;
+        productsInCar = [];
         return;
     } else {
         products.forEach(
@@ -188,7 +190,7 @@ function loadProductInCar() {
             }
         )
 
-        document.querySelector('.badge .qty').innerHTML = productsInCarView.length;
+        badge.innerHTML = productsInCarView.length;
     }
     
 }
